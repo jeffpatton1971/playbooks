@@ -7,3 +7,10 @@
     failed_when: false
     changed_when: false
     register: terraform_versions_match
+
+  - name: Terraform Found
+    debug:
+      msg: "{{ terraform_found.stdout }}"
+  - name: Terraform Match Var
+    debug:
+      msg: "{{ terraform_versions_match.rc }}"

@@ -27,10 +27,3 @@
   - name: OS Family
     debug:
       msg: "{{ os_family }}"
-  - name: Terraform Found
-    debug:
-      msg: "{{ terraform_found }}"
-  - name: Terraform Match Var
-    debug:
-      msg: "{{ terraform_versions_match }}"
-
