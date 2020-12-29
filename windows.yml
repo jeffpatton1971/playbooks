@@ -1,0 +1,11 @@
+  - name: Check terraform version
+    win_shell: "terraform version |Select-Object -First 1"
+    when: ansible_facts['os_family']|lower == 'windows'
+    register: terraform_found
+
+  - name: Check terraform version
+    win_shell: "terraform version |Select-Object -First 1 |Select-String {{ terraform_version }}"
+    failed_when: false
+    changed_when: false
+    when: ansible_facts['os_family']|lower == 'windows'
+    register: terraform_versions_match

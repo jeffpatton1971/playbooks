@@ -1,0 +1,11 @@
+  - name: Check terraform version
+    shell: "terraform version 2>&1 | head -n 1"
+    when: ansible_facts['os_family']|lower == 'debian'
+    register: terraform_found
+
+  - name: Check terraform version
+    shell: "terraform version 2>&1 | head -n 1 | grep -q {{terraform_version}}"
+    failed_when: false
+    changed_when: false
+    when: ansible_facts['os_family']|lower == 'debian'
+    register: terraform_versions_match

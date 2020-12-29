@@ -1,0 +1,36 @@
+- hosts: all
+  vars:
+    name1: "{{ ansible_hostname }}"
+    name2: "{{ inventory_hostname }}"
+    name3: "{{ ansible_fqdn }}"
+    os_family: "{{ ansible_facts['os_family'] }}"
+    terraform_version: 0.12.24
+
+  tasks:
+  - name: OS Test
+    include: windows.yml
+    when: ansible_facts['os_family']|lower == 'windows'
+
+  - name: OS Test
+    include: linux.yml
+    when: ansible_facts['os_family']|lower == 'debian'
+
+  - name: Ansible Hostname
+    debug:
+      msg: "{{ name1 }}"
+  - name: Inventory Hostname
+    debug:
+      msg: "{{ name2 }}"
+  - name: Ansible FQDN
+    debug:
+      msg: "{{ name3 }}"
+  - name: OS Family
+    debug:
+      msg: "{{ os_family }}"
+  - name: Terraform Found
+    debug:
+      msg: "{{ terraform_found }}"
+  - name: Terraform Match Var
+    debug:
+      msg: "{{ terraform_versions_match }}"
+
